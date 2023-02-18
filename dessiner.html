@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<title>HTML5 : Canvas</title>
+<meta charset="utf-8">
+<style>
+body {
+background:#eee;
+text-align:center;
+padding-top:10%;
+}
+.palette span {
+display:inline-block;
+width:40px;
+height:40px;
+cursor:pointer;
+border:2px solid transparent;
+border-radius:4px;
+}
+.palette span:hover {
+border-color:white;
+}
+canvas {
+cursor:crosshair;
+border:5px solid #666;
+background:white;
+border-radius:4px;
+box-shadow:0px 0px 20px #666;
+margin-top:20px;
+}
+	 .button100 {
+    background-color: grey;
+    border: 1 solid black;
+	border-radius: 2px;
+    color: white;
+    padding: 10px 38px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+	}
+</style>
+</head>
+<body>
+<!-- Palette de couleurs _ -->
+<div class="palette">
+<span onclick="modifierCouleur('#206BA4');" style="background:#206BA4"></span>
+<span onclick="modifierCouleur('#54A4DE');" style="background:#54A4DE"></span>
+<span onclick="modifierCouleur('#BBD9EE');" style="background:#BBD9EE"></span>
+<span onclick="modifierCouleur('#BEDF5D');" style="background:#BEDF5D"></span>
+<span onclick="modifierCouleur('#D6EB9A');" style="background:#D6EB9A"></span>
+<span onclick="modifierCouleur('#FF9834');" style="background:#FF9834"></span>
+<span onclick="modifierCouleur('#FFBF80');" style="background:#FFBF80"></span>
+<span onclick="modifierCouleur('#F6E896');" style="background:#F6E896"></span>
+<span onclick="modifierCouleur('#b07d42');" style="background:#b07d42"></span>
+<span onclick="modifierCouleur('#FF5349');" style="background:#FF5349"></span>
+</div>
+<!-- Canvas -->
+<canvas id="dessin" width="480" height="360"></canvas><br></hr> <br>
+					<center><button class="button100" value="dessiner" value="dessiner"><a href="index.html">index</button></center>
+
+<script>
+
+var moncanvas = document.getElementById('dessin');
+var ctx = moncanvas.getContext('2d');
+var en_dessin = false;
+// Propriétés graphiques par défaut _
+ctx.strokeStyle = "black";
+ctx.lineWidth = 2;
+// Bouton de souris activé _
+moncanvas.onmousedown = function(e) {
+// Dessin activé
+en_dessin = true;
+// Repositionnement du début du tracé
+ctx.moveTo(e.offsetX,e.offsetY);
+};
+// Mouvement de souris _
+moncanvas.onmousemove = function(e) {
+if(en_dessin) dessiner(e.offsetX,e.offsetY);
+};
+// Bouton de souris relâché _
+moncanvas.onmouseup = function(e) {
+// Dessin désactivé
+en_dessin = false;
+};
+// Ajoute un segment au tracé _
+function dessiner(x,y) {
+ctx.lineTo(x,y);
+ctx.stroke();
+}
+// Modification de la couleur du contexte _
+function modifierCouleur(codeCouleur) {
+if(codeCouleur) ctx.strokeStyle = codeCouleur;
+}
+</script>
+</body>
+</html>
